@@ -8,7 +8,7 @@ export class CartService {
   private readonly _items = signal<CartItem[]>([]);
 
   readonly items = this._items.asReadonly();
-  readonly totalCount = computed(() => this._items().reduce((sum, i) => sum + i.quantity));
+  readonly totalCount = computed(() => this._items().reduce((sum, i) => sum + i.quantity, 0));
   readonly totalPrice = computed(() =>
     this._items().reduce(
       (sum, i) => sum + calcDiscountedPrice(i.product.price, i.product.discountPercent),
